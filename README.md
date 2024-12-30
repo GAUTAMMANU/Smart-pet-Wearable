@@ -16,102 +16,61 @@ The **Smart Pet Wearable** is a device designed to monitor pets' temperature, ac
 4. **Emergency Alerts**: The device can send an alert if a pet’s temperature or activity level is abnormal.
 
 ## Components Used and Why
+- **Arduino Nano**: Small and efficient microcontroller for handling the sensors, GSM, and GPS modules.
+- **MPU-6050**: Detects pet's activity by measuring acceleration.
+- **SIM800L GSM Module**: Sends real-time SMS data to the owner.
+- **DS18B20 Temperature Sensor**: Measures pet's body temperature.
+- **NEO-6M GPS Module**: Tracks the pet's location in real-time.
+- **1000µF Capacitor**: Stabilizes power to the SIM800L module to prevent drops during transmission.
+- **Li-ion Battery**: Powers the system; 5V for Arduino and 3.7V for SIM800L. (while testing just connect arduino to your laptop for power)
+- TP4056 1A Li-ion Battery Charging Module (will be needed for recharging li-ion battery, not necessary though-other methods maybe used)
 
-### 1. **Arduino Nano**
-   - **Reason**: Arduino Nano is a small, versatile microcontroller that is perfect for compact projects. It is powerful enough to handle the input and output operations for the sensors, GPS module, and GSM module while being energy-efficient for portable applications.
+## Components and Connections
 
-### 2. **MPU-6050 (Accelerometer & Gyroscope)**
-   - **Reason**: This sensor is used to detect the pet's movement and activity. It helps in determining whether the pet is stationary, walking, or running by measuring the accelerations along different axes.
+1. **Arduino Nano to MPU-6050 (Accelerometer & Gyroscope)**
+   - **VCC** -> **5V** (Arduino Nano)
+   - **GND** -> **GND** (Arduino Nano)
+   - **SDA** -> **A4** (Arduino Nano)
+   - **SCL** -> **A5** (Arduino Nano)
 
-### 3. **SIM800L GSM Module**
-   - **Reason**: The SIM800L is used for sending SMS messages with the pet’s health data (temperature, activity level, location). This allows the owner to receive real-time updates on their pet’s condition via text messages.
+2. **Arduino Nano to SIM800L GSM Module**
+   - **VCC** -> **3.7V Li-ion Battery** (through 1000µF capacitor)
+   - **GND** -> **GND** (Arduino Nano)
+   - **TX** -> **D2** (Arduino Nano)
+   - **RX** -> **D3** (Arduino Nano)
 
-### 4. **DS18B20 Temperature Sensor**
-   - **Reason**: This sensor is used to monitor the pet’s body temperature. By checking the temperature, the device can provide insights into the pet's health status, such as detecting fever or abnormal body temperature.
+3. **Arduino Nano to DS18B20 Temperature Sensor**
+   - **VCC** -> **5V** (Arduino Nano)
+   - **GND** -> **GND** (Arduino Nano)
+   - **Data** -> **D4** (Arduino Nano)
 
-### 5. **NEO-6M GPS Module**
-   - **Reason**: This GPS module is used to track the pet's location in real-time. It provides accurate latitude and longitude data, which can be sent to the owner via SMS in case the pet is lost or strays.
+4. **Arduino Nano to NEO-6M GPS Module**
+   - **VCC** -> **5V** (Arduino Nano)
+   - **GND** -> **GND** (Arduino Nano)
+   - **TX** -> **D5** (Arduino Nano)
+   - **RX** -> **D6** (Arduino Nano)
 
-### 6. **1000µF Capacitor**
-   - **Reason**: The 1000µF capacitor is used to stabilize the power supply for the **SIM800L GSM module**, which can sometimes cause power fluctuations due to its high current draw during operation.
+5. **Capacitor for SIM800L**
+   - A **1000µF** capacitor is connected in parallel with the **VCC** pin of the **SIM800L GSM module** to stabilize the power supply. This capacitor helps handle the high current draw of the SIM800L during transmission.
 
-### 7. **3.7V 2.2A Li-ion Battery**
-   - **Reason**: This battery is used to power the **SIM800L GSM module**, ensuring it has sufficient power for sending messages, especially during high current draws.
+## General Instructions
 
-## Circuit Diagram
-
-Below are the connections for each component in the Smart Pet Wearable system:
-
-### **Arduino Nano to MPU-6050**:
-- **VCC** -> **5V** (Arduino Nano)
-- **GND** -> **GND** (Arduino Nano)
-- **SDA** -> **A4** (Arduino Nano)
-- **SCL** -> **A5** (Arduino Nano)
-
-### **Arduino Nano to SIM800L**:
-- **VCC** -> **3.7V battery (through 1000µF capacitor)**
-- **GND** -> **GND** (Arduino Nano)
-- **TX** -> **D2 (TX)** (Arduino Nano)
-- **RX** -> **D3 (RX)** (Arduino Nano)
-
-### **Arduino Nano to DS18B20**:
-- **VCC** -> **5V** (Arduino Nano)
-- **GND** -> **GND** (Arduino Nano)
-- **Data** -> **D4** (Arduino Nano)
-
-### **Arduino Nano to NEO-6M GPS Module**:
-- **VCC** -> **5V** (Arduino Nano)
-- **GND** -> **GND** (Arduino Nano)
-- **TX** -> **D5 (RX)** (Arduino Nano)
-- **RX** -> **D6 (TX)** (Arduino Nano)
-
-## Pin Diagrams for Components
-
-### 1. **Arduino Nano**
-   - **Pin A4**: SDA (I2C)
-   - **Pin A5**: SCL (I2C)
-   - **Pin D2**: TX (For SIM800L)
-   - **Pin D3**: RX (For SIM800L)
-   - **Pin D4**: Data (For DS18B20)
-   - **Pin D5**: RX (For GPS Module)
-   - **Pin D6**: TX (For GPS Module)
-
-### 2. **MPU-6050**
-   - **VCC** -> 5V
-   - **GND** -> GND
-   - **SDA** -> A4 (Arduino Nano)
-   - **SCL** -> A5 (Arduino Nano)
-
-### 3. **SIM800L**
-   - **VCC** -> 3.7V Li-ion Battery
-   - **GND** -> GND (Arduino Nano)
-   - **TX** -> D2 (Arduino Nano)
-   - **RX** -> D3 (Arduino Nano)
-
-### 4. **DS18B20**
-   - **VCC** -> 5V (Arduino Nano)
-   - **GND** -> GND (Arduino Nano)
-   - **Data** -> D4 (Arduino Nano)
-
-### 5. **NEO-6M GPS Module**
-   - **VCC** -> 5V (Arduino Nano)
-   - **GND** -> GND (Arduino Nano)
-   - **TX** -> D5 (Arduino Nano)
-   - **RX** -> D6 (Arduino Nano)
+- **Arduino Code Uploading**: Only the latest uploaded code will be active on the Arduino at any time. If you need to reload the program, press the reset button on the Arduino Nano to restart and upload a new sketch.
+- **NEO-6M GPS Module**: The GPS module requires good reception and an open environment to establish a connection. It may take a few minutes(maybe even +20 min) for the GPS to acquire a signal(show a blink). If it struggles to connect, consider using an improved antenna or alternative portable GPS modules for better performance.
+- **SIM800L GSM Module**: The SIM800L GSM module blinks once every second while attempting to connect to the network. Once the connection is successfully established, the blink rate changes to once every 3 seconds. If the SIM800L keeps restarting or fails to establish a connection, check the connections to the battery and capacitor. Inadequate power can cause instability; ensure the capacitor is correctly placed to handle voltage spikes.
+- **Component Sources**: Components, breadboards, and connectors (male/female) can be sourced from reliable online stores such as [Robu.in](https://www.robu.in), [Robocraze](https://www.robocraze.com), and similar electronics suppliers. 
+- **Testing and Troubleshooting**: Always ensure that the power supply and connections are correct before powering up the system. A stable power source and proper wiring are crucial for the proper functioning of all components, especially the SIM800L and GPS module.
 
 ## References
 
-- [MPU-6050 Pinout & Datasheet](https://www.instructables.com/id/How-to-use-the-MPU-6050-with-Arduino/)
-- [SIM800L Pinout & Datasheet](https://www.electronicwings.com/nodemcu/sim800l-gsm-module)
-- [DS18B20 Pinout & Datasheet](https://www.analog.com/en/products/ds18b20.html)
-- [NEO-6M GPS Module Pinout & Datasheet](https://www.electronicwings.com/nodemcu/neo-6m-gps-module)
+- [MPU-6050 Pinout & Datasheet](https://components101.com/sensors/mpu6050-module)
+- [SIM800L Pinout & Datasheet](https://components101.com/wireless/sim800l-gsm-module-pinout-datasheet-equivalent-circuit-specs)
+- [DS18B20 Pinout & Datasheet](https://randomnerdtutorials.com/guide-for-ds18b20-temperature-sensor-with-arduino/)
+- [NEO-6M GPS Module Pinout & Datasheet]([https://www.electronicwings.com/nodemcu/neo-6m-gps-module](https://randomnerdtutorials.com/guide-to-neo-6m-gps-module-with-arduino/))
 
 ## General References
 
 - [Arduino Documentation](https://www.arduino.cc/en/Tutorial/HomePage)
-- [Fritzing Circuit Diagrams](https://fritzing.org/home/)
-- [Tinkercad Circuits](https://www.tinkercad.com/circuits)
-- [KiCad Documentation](https://kicad.org/)
 
 ## Conclusion
 The **Smart Pet Wearable** is a versatile and cost-effective solution for monitoring the health and well-being of your pet. With temperature tracking, activity detection, and GPS location capabilities, this project provides a simple but powerful tool for ensuring your pet's safety and health. Through real-time SMS updates, pet owners can quickly address any potential issues, making it an essential gadget for responsible pet care.
