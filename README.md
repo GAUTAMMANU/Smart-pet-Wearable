@@ -66,7 +66,7 @@ The **Smart Pet Wearable** is a device designed to monitor pets' temperature, ac
 - [MPU-6050 Pinout & Datasheet](https://components101.com/sensors/mpu6050-module)
 - [SIM800L Pinout & Datasheet](https://components101.com/wireless/sim800l-gsm-module-pinout-datasheet-equivalent-circuit-specs)
 - [DS18B20 Pinout & Datasheet](https://randomnerdtutorials.com/guide-for-ds18b20-temperature-sensor-with-arduino/)
-- [NEO-6M GPS Module Pinout & Datasheet]([https://www.electronicwings.com/nodemcu/neo-6m-gps-module](https://randomnerdtutorials.com/guide-to-neo-6m-gps-module-with-arduino/))
+- [NEO-6M GPS Module Pinout & Datasheet](https://randomnerdtutorials.com/guide-to-neo-6m-gps-module-with-arduino/)
 
 ## General References
 
